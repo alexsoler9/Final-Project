@@ -2,6 +2,7 @@ from pathlib import Path
 import sys
 from tqdm import tqdm
 import matplotlib.pyplot as plt
+from general.utils import save_video_path
 
 import cv2
 import numpy as np
@@ -42,7 +43,7 @@ class ObjectDetector:
             self.object_detector_model = RTDETR(self.WEIGTH_PATH / model_selection)
         else:
             raise Exception(f"Model '{model_selection}' is not implemented.")
-        
+    
         
     def save_tracking(self, video_path):
         cap = cv2.VideoCapture(video_path)
@@ -57,6 +58,7 @@ class ObjectDetector:
         if not self.DATA_PATH.exists():
             self.DATA_PATH.mkdir()
             raise Exception(f"The path '{self.DATA_PATH.as_posix()}' is not recognized.")
+        save_video_path(self.DATA_PATH, video_path)
 
         video_name = Path(video_path).stem
         print(video_name)

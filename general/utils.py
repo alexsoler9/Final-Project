@@ -127,7 +127,7 @@ def save_dataframe_to_csv(dataframe, video_path, name=None):
 
     """
 
-    # Check if the folder to stroe data exists
+    # Check if the folder to store data exists
     DATA_PATH = Path(f"../Project_V2/data")
     if not DATA_PATH.exists():
         raise Exception(f"The path '{DATA_PATH.as_posix()}' is not recognized.")
@@ -145,5 +145,18 @@ def save_dataframe_to_csv(dataframe, video_path, name=None):
     dataframe.to_csv(file_path, index=False)
     print(f"Data frame successfully saved at '{DATA_PATH.as_posix()}'.")
 
+def save_video_path(data_path, video_path):
+    # Check if the folder to store data exists
+    DATA_PATH = Path(f"../Project_V2/data")
+    if not DATA_PATH.exists():
+        raise Exception(f"The path '{DATA_PATH.as_posix()}' is not recognized.")
+    video_name = Path(video_path).stem
+    DATA_PATH = Path(DATA_PATH / video_name)
+    if not DATA_PATH.exists():
+        print(f"Creating data folder in {DATA_PATH.as_posix()}")
+        DATA_PATH.mkdir()
+    file_path = DATA_PATH.as_posix() + "/" + "video_path.csv"
+    df = pd.DataFrame({"video_path": video_path}, index=[0])
+    df.to_csv(file_path, index=False)
         
         

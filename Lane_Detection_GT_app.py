@@ -46,6 +46,7 @@ class LaneDetectionApp:
         self.loaded_annotations = None
 
         self.canvas.bind("<Button-1>", self.on_click)
+        self.canvas.bind("<Button-3>", self.erase_line)
         self.root.bind("<Key>", self.next_frame_on_key)
         self.current_frame_number = 0
         self.lane_points = {"left": [], "right": []}
@@ -63,7 +64,7 @@ class LaneDetectionApp:
         csv_path = filedialog.askopenfilename(filetypes=[("CSV files", "*.csv")])
         if not csv_path:
             return
-        self.loaded_annotations = pd.read_csv(csv_path)
+        self.loaded_annotations = pd.read_csv(csv_path, usecols=["Frame Number", "Ego Left Lane", "Ego Right Lane"])
         self.loaded_annotations["Ego Left Lane"] = self.loaded_annotations["Ego Left Lane"].apply(self.safe_eval)
         self.loaded_annotations["Ego Right Lane"] = self.loaded_annotations["Ego Right Lane"].apply(self.safe_eval)
         self.current_frame_number = 0
@@ -106,6 +107,12 @@ class LaneDetectionApp:
         x_original = int(x / self.scaling_factor)
         y_original = int(y / self.scaling_factor)
         self.lane_points[self.selected_line].append((x_original, y_original))
+        self.draw_points()
+
+    def erase_line(self, event):
+        if self.selected_line is None:
+            return
+        self.lane_points[self.selected_line] = []
         self.draw_points()
     
     def draw_points(self):
@@ -166,10 +173,14 @@ class LaneDetectionApp:
             df_new = pd.DataFrame(self.annotations)
             # Update the loaded annotations with new ones
             for idx, row in df_new.iterrows():
-                try:
-                    df_loaded.iloc[row["Frame Number"]] = row
-                except:
-                    print("You tried inserting more annotations than the presents in the original csv")
+                frame_number = row["Frame Number"]
+                if frame_number < len(df_loaded):
+                    # If the frame number exists in the loaded annotations, update it
+                    df_loaded.iloc[frame_number] = row
+                else:
+                    # If the frame number does not exist, append the new annotation
+                    df_loaded = df_loaded.append(row, ignore_index=True)
+            
             df_loaded.to_csv(filename, index=False)
         else:
             df = pd.DataFrame(self.annotations)

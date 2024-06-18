@@ -250,6 +250,7 @@ def object_postprocess():
     # Check if video_path is set
     if video_path:
         try:
+            key = None
             # Obtain the video name
             video_name = Path(video_path).stem
             data_path = check_data_folder(video_name)
@@ -261,8 +262,11 @@ def object_postprocess():
                 annotated_frame = frame.copy()
                 annotated_frame = cv2.resize(annotated_frame, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
                 cv2.imshow("Object Detection", annotated_frame)
-                if cv2.waitKey(33) == ord("q"):
+                key = cv2.waitKey(33)
+                if key == ord("q"):
                     break
+                elif key == ord("p"):
+                    cv2.waitKey(0)
             cv2.destroyAllWindows()
             save_dataframe_to_csv(updated_df, video_file, "objects_detections_processed.csv")
         except Exception as e:

@@ -225,7 +225,8 @@ class KalmanFilter(object):
             new_mean = mean + np.dot(innovation, kalman_gain.T)
             new_covariance = covariance - np.linalg.multi_dot((
                 kalman_gain, projected_cov, kalman_gain.T))
-        except:
+        except Exception as e:
+            #print(e)
             # Added
             new_mean = mean #np.zeros_like(mean)
             new_covariance = np.zeros_like(covariance)

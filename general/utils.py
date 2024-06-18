@@ -83,17 +83,18 @@ def select_folder():
 def check_data_folder(file_name):
 	
 	# Check if folder to store data exists
-	DATA_PATH = PROJECT_PATH / "data"
-	if not DATA_PATH.exists():
-		raise Exception(f"The path '{DATA_PATH.as_posix()}' is not recognized.")
-	video_name = Path(file_name).stem
+	#DATA_PATH = PROJECT_PATH / "data"
+    DATA_PATH = Path("./data") 
+    if not DATA_PATH.exists():
+        raise Exception(f"The path '{DATA_PATH.as_posix()}' is not recognized.")
+    video_name = Path(file_name).stem
 	
-	DATA_PATH = Path(DATA_PATH / video_name)
-	if not DATA_PATH.exists():
-		print(f"Creating data folder in {DATA_PATH.as_posix()}")
-		DATA_PATH.mkdir()
+    DATA_PATH = Path(DATA_PATH / video_name)
+    if not DATA_PATH.exists():
+        print(f"Creating data folder in {DATA_PATH.as_posix()}")
+        DATA_PATH.mkdir()
 
-	return DATA_PATH
+    return DATA_PATH
 
 def path_to_files_in_folder(folder_path, file_names_to_check=["video_path.csv", "objects_detections_processed.csv"]):
     folder_path = Path(folder_path)
@@ -128,7 +129,7 @@ def save_dataframe_to_csv(dataframe, video_path, name=None):
     """
 
     # Check if the folder to store data exists
-    DATA_PATH = Path(f"../Project_V2/data")
+    DATA_PATH = Path(f"./data")
     if not DATA_PATH.exists():
         raise Exception(f"The path '{DATA_PATH.as_posix()}' is not recognized.")
     video_name = Path(video_path).stem
@@ -147,7 +148,7 @@ def save_dataframe_to_csv(dataframe, video_path, name=None):
 
 def save_video_path(data_path, video_path):
     # Check if the folder to store data exists
-    DATA_PATH = Path(f"../Project_V2/data")
+    DATA_PATH = Path(f"./data")
     if not DATA_PATH.exists():
         raise Exception(f"The path '{DATA_PATH.as_posix()}' is not recognized.")
     video_name = Path(video_path).stem

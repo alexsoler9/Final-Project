@@ -22,7 +22,7 @@ def save_objects_detections_list_to_csv_sink(list_to_save, video_path, name):
     """
 
     # Check if the folder to stroe data exists
-    DATA_PATH = Path(f"../Project_V2/data")
+    DATA_PATH = Path(f"./data")
     if not DATA_PATH.exists():
         raise Exception(f"The path '{DATA_PATH.as_posix()}' is not recognized.")
     video_name = Path(video_path).stem

@@ -22,7 +22,7 @@ sys.path.insert(0, str(project_path))
 class ObjectDetector:
     def __init__(self, model_selection="yolov9c.pt"):
         # Define the main path of the project
-        self.MAIN_PATH = Path("../Project_v2")
+        self.MAIN_PATH = Path(".")
         # Path for the module
         self.MODULE_PATH = self.MAIN_PATH / "ObjectDetector"
         path_to_check = Path(__file__).parent
@@ -86,7 +86,7 @@ class ObjectDetector:
         # Progress bar
         progress_bar = tqdm(total=total_frames)
      
-        track_buffer_S = 4
+        track_buffer_S = 10
         frame_rate=30
         tracker_weight = self.WEIGTH_PATH / "clip_market1501.pt"
         tracker = BoTSORT(model_weights= tracker_weight, #Path('clip_market1501.pt'), # which ReID model to use
@@ -95,13 +95,13 @@ class ObjectDetector:
                         with_reid=True,
                         per_class=False,
                         frame_rate=frame_rate,
-                        track_high_thresh=0.3, 
-                        track_low_thresh=0.3,
-                        new_track_thresh=0.6,
-                        match_thresh=0.5,
+                        track_high_thresh=0.4, 
+                        track_low_thresh=0.2,
+                        new_track_thresh=0.5,
+                        match_thresh=0.8,
                         track_buffer=track_buffer_S*frame_rate,
-                        appearance_thresh=0.05,
-                        proximity_thresh=1,
+                        appearance_thresh=0.15,
+                        proximity_thresh=0.99,
                         fuse_first_associate=False
                         )
         
@@ -118,7 +118,7 @@ class ObjectDetector:
                 annotated_frame = frame.copy()
 
                 # Pass frame to object detector and obtain the detections
-                result = self.object_detector_model(frame, verbose=False)[0]
+                result = self.object_detector_model.predict(frame, classes=selected_classes, imgsz=(960,544), augment=False, verbose=False)[0]
                 detections = sv.Detections.from_ultralytics(result)
 
                 detections = detections[np.isin(detections.class_id, selected_classes)]

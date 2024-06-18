@@ -36,7 +36,7 @@ def check_data_folder(file_name):
 	global SAVE_COORDS
 	global VIEW
 	# Check if folder to store data exists
-	DATA_PATH = Path(f"../Project_V2/data")
+	DATA_PATH = Path(f"./data")
 	if not DATA_PATH.exists():
 		raise Exception(f"The path '{DATA_PATH.as_posix()}' is not recognized.")
 	video_name = Path(file_name).stem
@@ -243,17 +243,9 @@ def lane_detection(video_path, LINE_POINT=1200):
 
 
 if __name__ == "__main__":
-	# video_path = askopenfilename()
-	# LINE_POINT = 1220
+	video_path = askopenfilename()
+	LINE_POINT = 1220
 
-	# lane_detection(video_path, LINE_POINT=LINE_POINT)
+	lane_detection(video_path, LINE_POINT=LINE_POINT)
 
-	gt_file = "X:\Life\TFG\Coding\Testing\Videos\BikeBi\GT_LD_VID_20220426_161600.csv"
-	dt_file = "X:\Life\TFG\Coding\Project_v2\data\VID_20220426_161600\lane_detection_processed.csv"
-	gt_df = load_data(gt_file)
-	dt_df = load_data(dt_file)
-	results = evaluate_lanes(gt_df, dt_df)
-	plot_iou(results)
-
-	f1_score = compute_f1_score(gt_df, dt_df)
-	print(f"F1 Score: {f1_score:.4f}")
+	

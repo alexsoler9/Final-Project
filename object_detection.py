@@ -16,5 +16,5 @@ def object_detection_in_video(video_path, model_selection="yolov9e.pt"):
     model.save_tracking(video_path)
 
 if __name__ == "__main__":
-    video_path = ""
+    video_path = "X:\Life\TFG\Coding\Testing\Videos\BikeBi\VID_20220427_143651.mp4"
     object_detection_in_video(video_path)

@@ -1,12 +1,12 @@
 # Ignore all files in the data folder
 /data/*
-!/data/.gitignore
+!/data/placeholder.txt
 # Ignore all weight files in the LaneDetector model folder but not the folder
 /LaneDetector/models/*
-!/LaneDetector/models/.gitignore
+!/LaneDetector/models/placeholder.txt
 # Ignore all weight files in the ObjectDetector weights folder but not the folder
 /ObjectDetector/weights/*
-!/ObjectDetector/weights/.gitignore
+!/ObjectDetector/weights/placeholder.txt
 
 /Metric_3D/media/*
 /Metric_3D/CameraCalibration/images/*

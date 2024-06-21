@@ -1,4 +1,4 @@
-## Isntallation
+## Installation
 
 Follow these steps to run the project on your local machine.
 

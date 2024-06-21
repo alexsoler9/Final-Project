@@ -11,6 +11,7 @@
 /Metric_3D/media/*
 /Metric_3D/CameraCalibration/images/*
 /Metric_3D/weight/*
+!/Metric_3D/weight/placeholder.txt
 
 /Metric_3D/show_dirs/*
 /Metric_3D/data/*

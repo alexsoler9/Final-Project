@@ -191,7 +191,7 @@ class UltrafastLaneDetectorV2(LaneDetectBase):
                         out_tmp = (pred['loc_row'][0,all_ind,k,i].softmax(0) * all_ind.float()).sum() + 0.5
                         out_tmp = out_tmp / (num_grid_row-1) * original_image_width
                         #print(i, int(row_anchor[k] * original_image_height),exist_row_prob[0,0,k,i],exist_row_prob[0,1,k,i])
-                        if exist_row_prob[0,1,k,i] > 0.9:
+                        if exist_row_prob[0,1,k,i] > 0.95:
                             #print(i, int(row_anchor[k] * original_image_height),exist_row_prob[0,0,k,i], exist_row_prob[0,1,k,i], count)
                             tmp.append((int(out_tmp), int(row_anchor[k] * original_image_height)))
                 #print()
@@ -207,7 +207,7 @@ class UltrafastLaneDetectorV2(LaneDetectBase):
                         out_tmp = (pred['loc_col'][0,all_ind,k,i].softmax(0) * all_ind.float()).sum() + 0.5
 
                         out_tmp = out_tmp / (num_grid_col-1) * original_image_height
-                        if exist_col_prob[0,1,k,i] > 0.8:
+                        if exist_col_prob[0,1,k,i] > 0.95:
                             tmp.append((int(col_anchor[k] * original_image_width), int(out_tmp)))
             coords.append(tmp)
         return coords

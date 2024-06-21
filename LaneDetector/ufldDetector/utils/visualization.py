@@ -192,10 +192,15 @@ def compute_moving_average_r2(dataframe, window_size):
     """
     lanes = [col for col in dataframe.columns if "R^2" in col]
     avg_r2_df = dataframe.copy()
-    # Ensure no NaN values
-    #avg_r2_df[lanes] = avg_r2_df[lanes].fillna(0)  min_periods=1
+
     for lane in lanes:
-        avg_r2_df[f"Avg_{lane}"] = avg_r2_df[lane].rolling(window = 2*window_size+1, center=True).mean()
+        rolling_window_size = 2 * window_size + 1
+        original_values = avg_r2_df[lane]
+        # Mask zero values
+        masked_values = original_values.mask(original_values == 0)
+        # Compute rolling mean ensuring all values in the window are valid
+        rolling_mean = masked_values.rolling(window=rolling_window_size, center=True, min_periods=rolling_window_size).mean()
+        avg_r2_df[f"Avg_{lane}"] = rolling_mean
     
     return avg_r2_df
 

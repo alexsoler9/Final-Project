@@ -1,35 +1,72 @@
-## Installation
+## Isntallation
 
 Follow these steps to run the project on your local machine.
 
 ### 1. Clone the repository
 
-First, clone hte repository to your local machine using the following commnad:
+First, clone the repository to your local machine using the following command.
 
 ```bash
 git clone https://github.com/alexsoler9/Final-Project.git
 ```
 
 ### 2. Navigate to the project directory
+Change directory to the new cloned repository:
 
-### 3. (Optional) It is recommended to create a virtual environment
+```bash
+cd Final-Project
+```
 
-Activate it.
+### 3. (Optional) Create a virtual environment.
+
+It is recommended to create a virtual environment to manage dependencies.
+
+Create the virtual environment:
+
+```bash
+python -m venv venv
+```
+
+Activate the virtual environment:
+
+For Windows:
+
+```bash
+.\venv\Scripts\activate
+```
+
+For macOS and Linux
+
+```bash
+source venv/bin/activate
+```
 
 ### 4. Install PyTorch and torchvision
 
-Install PyTorch 2.0.1 and torchvision 0.15.2 with CUDA 11.8 support
+Install PyTorch 2.0.1 and torchvision 0.15.2 with CUDA 11.8 support:
 
 ```bash
 pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 -f https://download.pytorch.org/whl/torch_stable.html
-
 ```
 
-### 5. Install  other dependencies
+### 5. Install remaining dependencies
 
-Install the remaining required dependencies
+Install the remaining required dependencies:
 
 ```bash
 pip install -r requirements.txt
-
 ```
+
+### 6. Download required models
+
+The following models need to be downloaded from the respective Github repositories:
+
+- From UFLDv2: Download [tu_simple_res18.pth](https://drive.google.com/file/d/1Clnj9-dLz81S3wXiYtlkc4HVusCb978t/view?usp=sharing)
+- From Metric3D: Download [metric_depth_vit_small_800k.pth](https://drive.google.com/file/d/1YfmvXwpWmhLg3jSxnhT7LvY0yawlXcr_/view?usp=drive_link)
+
+Put **tu_simple_res18.pth** inside "Final-Project/LaneDetector/models".
+
+Put **metric_depth_vit_small_800k.pth** inside "Final-Project/Metric_3D/weight".
+
+**Note:**
+Sometimes when using the object detector for the first time, the following error can appear: Ultralytics requirement ['dill'] not found. Usually, it will auto-update itself. After that, you just need to restart the runtime.

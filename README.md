@@ -70,3 +70,18 @@ Put **metric_depth_vit_small_800k.pth** inside "Final-Project/Metric_3D/weight".
 
 **Note:**
 Sometimes when using the object detector for the first time, the following error can appear: Ultralytics requirement ['dill'] not found. Usually, it will auto-update itself. After that, you just need to restart the runtime.
+
+## Utility App Usage
+
+To simplify usage, a utiity app has been created. Follow these steps:
+
+1. Ensure you are in the project directory.
+2. Execute **app.py** to launch the app. A window should pop up.
+3. Press **Select Video** to choose a video file.
+4. Once a video is selected, you can choose to either:
+   - Perform Lane Detection
+   - Perform Object Detection 
+5. After performning Lane Detection, you can use the **Lane Postprocess** function.
+6. After performing Object detection, you can use the **Object Postrprocess** function.
+7. (Optional) Once **Object Postprocess** is complete, you can execute **Depth Estimation**
+8. after bot **Lane Postprocess** and **Object Postprocess** are complete, you can use **Zone Separation**.

@@ -84,4 +84,4 @@ To simplify usage, a utiity app has been created. Follow these steps:
 5. After performning Lane Detection, you can use the **Lane Postprocess** function.
 6. After performing Object detection, you can use the **Object Postrprocess** function.
 7. (Optional) Once **Object Postprocess** is complete, you can execute **Depth Estimation**
-8. after bot **Lane Postprocess** and **Object Postprocess** are complete, you can use **Zone Separation**.
+8. After both **Lane Postprocess** and **Object Postprocess** are complete, you can use **Zone Separation**.

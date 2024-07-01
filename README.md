@@ -85,3 +85,9 @@ To simplify usage, a utiity app has been created. Follow these steps:
 6. After performing Object detection, you can use the **Object Postrprocess** function.
 7. (Optional) Once **Object Postprocess** is complete, you can execute **Depth Estimation**
 8. After both **Lane Postprocess** and **Object Postprocess** are complete, you can use **Zone Separation**.
+
+## Acknowledgements
+This is the Code for my Bachelor Thesis, which uses code from the following projects:
+1. BoxMOT [GitHub link](https://github.com/mikel-brostrom/boxmot)
+2. UFLDv2 [GitHub link](https://github.com/cfzd/Ultra-Fast-Lane-Detection-v2)
+3. Metric3D [GitHub link](https://github.com/YvanYin/Metric3D)
